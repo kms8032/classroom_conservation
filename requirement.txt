@@ -1,2 +1,5 @@
 dotenv
 opencv-python
+openpyxl
+pillow
+ultralytics
