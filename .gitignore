@@ -5,7 +5,6 @@
 runs/
 docs/
 data/
-result*/
 
 *.pt
 
