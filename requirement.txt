@@ -3,3 +3,4 @@ opencv-python
 openpyxl
 pillow
 ultralytics
+numpy

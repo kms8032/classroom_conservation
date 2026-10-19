@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.venv
+
+runs/
+docs/
+data/
+result*/
+
+*.pt
+
+# 확인용 이미지
+labels/images/
+__pycache__/
