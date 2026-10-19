@@ -1,0 +1,131 @@
+﻿date,time,cam,vlm_답,vlm_이유,vlm_초,file
+2026-10-13,13:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (excluding masked black regions), indicating ceiling lights are on.",25.79,/Volumes/T9/data/301/cam4/2026-10-13/13-00-00.jpg
+2026-10-13,14:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked), indicating ceiling lights are on",17.56,/Volumes/T9/data/301/cam4/2026-10-13/14-00-00.jpg
+2026-10-13,15:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",17.18,/Volumes/T9/data/301/cam4/2026-10-13/15-00-00.jpg
+2026-10-13,16:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked black), indicating ceiling lights are on",19.72,/Volumes/T9/data/301/cam4/2026-10-13/16-00-00.jpg
+2026-10-13,17:00,cam4,켜짐,"Room is evenly and brightly lit with no dark patches (ignoring masked areas), indicating ceiling lights are on.",22.33,/Volumes/T9/data/301/cam4/2026-10-13/17-00-02.jpg
+2026-10-13,18:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",18.76,/Volumes/T9/data/301/cam4/2026-10-13/18-00-00.jpg
+2026-10-13,19:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",20.55,/Volumes/T9/data/301/cam4/2026-10-13/19-00-00.jpg
+2026-10-13,20:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",19.8,/Volumes/T9/data/301/cam4/2026-10-13/20-00-00.jpg
+2026-10-13,21:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked), indicating ceiling lights are on",18.85,/Volumes/T9/data/301/cam4/2026-10-13/21-00-00.jpg
+2026-10-13,22:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-13/22-00-00.jpg
+2026-10-13,23:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-13/23-00-00.jpg
+2026-10-14,00:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/00-00-00.jpg
+2026-10-14,01:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/01-00-00.jpg
+2026-10-14,02:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/02-00-00.jpg
+2026-10-14,03:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/03-00-00.jpg
+2026-10-14,04:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/04-00-00.jpg
+2026-10-14,05:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/05-00-00.jpg
+2026-10-14,06:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/06-00-00.jpg
+2026-10-14,07:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",24.1,/Volumes/T9/data/301/cam4/2026-10-14/07-00-00.jpg
+2026-10-14,08:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",24.59,/Volumes/T9/data/301/cam4/2026-10-14/08-00-00.jpg
+2026-10-14,09:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",18.9,/Volumes/T9/data/301/cam4/2026-10-14/09-00-00.jpg
+2026-10-14,10:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",16.02,/Volumes/T9/data/301/cam4/2026-10-14/10-00-00.jpg
+2026-10-14,11:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",18.64,/Volumes/T9/data/301/cam4/2026-10-14/10-59-59.jpg
+2026-10-14,12:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",15.54,/Volumes/T9/data/301/cam4/2026-10-14/12-00-00.jpg
+2026-10-14,13:00,cam4,켜짐,"Room is evenly and brightly lit, no dark areas indicating lack of overhead lighting",17.09,/Volumes/T9/data/301/cam4/2026-10-14/13-00-00.jpg
+2026-10-14,14:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked), indicating ceiling lights are on",17.85,/Volumes/T9/data/301/cam4/2026-10-14/14-00-00.jpg
+2026-10-14,15:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",18.58,/Volumes/T9/data/301/cam4/2026-10-14/15-00-00.jpg
+2026-10-14,16:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",20.21,/Volumes/T9/data/301/cam4/2026-10-14/16-00-00.jpg
+2026-10-14,17:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",19.21,/Volumes/T9/data/301/cam4/2026-10-14/17-00-00.jpg
+2026-10-14,18:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",18.61,/Volumes/T9/data/301/cam4/2026-10-14/18-00-00.jpg
+2026-10-14,19:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (ignoring masked blacks), indicating ceiling lights are on",18.98,/Volumes/T9/data/301/cam4/2026-10-14/19-00-00.jpg
+2026-10-14,20:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/20-00-00.jpg
+2026-10-14,21:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/21-00-00.jpg
+2026-10-14,22:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/22-00-00.jpg
+2026-10-14,23:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-14/23-00-00.jpg
+2026-10-15,00:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-15/00-00-00.jpg
+2026-10-15,18:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-15/17-59-59.jpg
+2026-10-15,19:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-15/19-00-00.jpg
+2026-10-15,20:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-15/20-00-00.jpg
+2026-10-15,21:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked), indicating ceiling lights are on.",18.44,/Volumes/T9/data/301/cam4/2026-10-15/21-00-00.jpg
+2026-10-15,22:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (ignoring masked black regions), indicating ceiling lights are on.",18.55,/Volumes/T9/data/301/cam4/2026-10-15/22-00-00.jpg
+2026-10-15,23:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-15/23-00-00.jpg
+2026-10-16,00:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/00-00-00.jpg
+2026-10-16,01:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/01-00-00.jpg
+2026-10-16,02:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/02-00-00.jpg
+2026-10-16,03:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/03-00-00.jpg
+2026-10-16,04:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/04-00-00.jpg
+2026-10-16,05:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/05-00-00.jpg
+2026-10-16,06:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/06-00-00.jpg
+2026-10-16,07:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",21.22,/Volumes/T9/data/301/cam4/2026-10-16/07-00-00.jpg
+2026-10-16,08:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",21.66,/Volumes/T9/data/301/cam4/2026-10-16/08-00-00.jpg
+2026-10-16,09:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (ignoring masked blacks), indicating ceiling lights are on.",18.3,/Volumes/T9/data/301/cam4/2026-10-16/09-00-00.jpg
+2026-10-16,10:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked black), indicating ceiling lights are on",18.02,/Volumes/T9/data/301/cam4/2026-10-16/10-00-00.jpg
+2026-10-16,11:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (ignoring masked black regions), indicating ceiling lights are on.",17.98,/Volumes/T9/data/301/cam4/2026-10-16/11-00-00.jpg
+2026-10-16,12:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",19.13,/Volumes/T9/data/301/cam4/2026-10-16/11-59-59.jpg
+2026-10-16,13:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",20.69,/Volumes/T9/data/301/cam4/2026-10-16/13-00-00.jpg
+2026-10-16,14:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked), indicating ceiling lights are on.",18.0,/Volumes/T9/data/301/cam4/2026-10-16/14-00-00.jpg
+2026-10-16,15:00,cam4,켜짐,"Room is evenly and brightly lit, indicating overhead lights are on",17.67,/Volumes/T9/data/301/cam4/2026-10-16/15-00-00.jpg
+2026-10-16,16:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",18.78,/Volumes/T9/data/301/cam4/2026-10-16/16-00-00.jpg
+2026-10-16,17:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (ignoring masked black regions), indicating ceiling lights are on.",19.13,/Volumes/T9/data/301/cam4/2026-10-16/17-00-00.jpg
+2026-10-16,18:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked), indicating ceiling lights are on",17.67,/Volumes/T9/data/301/cam4/2026-10-16/18-00-00.jpg
+2026-10-16,19:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",19.04,/Volumes/T9/data/301/cam4/2026-10-16/19-00-00.jpg
+2026-10-16,20:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",18.22,/Volumes/T9/data/301/cam4/2026-10-16/20-00-00.jpg
+2026-10-16,21:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/21-00-00.jpg
+2026-10-16,22:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/22-00-00.jpg
+2026-10-16,23:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-16/23-00-00.jpg
+2026-10-17,00:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/00-00-00.jpg
+2026-10-17,01:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/01-00-00.jpg
+2026-10-17,02:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/01-59-59.jpg
+2026-10-17,03:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/03-00-00.jpg
+2026-10-17,04:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/04-00-00.jpg
+2026-10-17,05:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/05-00-00.jpg
+2026-10-17,06:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/06-00-00.jpg
+2026-10-17,07:00,cam4,켜짐,"Room is evenly and brightly lit with visible reflections on the floor, indicating ceiling lights are on.",18.02,/Volumes/T9/data/301/cam4/2026-10-17/07-00-00.jpg
+2026-10-17,08:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",22.28,/Volumes/T9/data/301/cam4/2026-10-17/08-00-00.jpg
+2026-10-17,09:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on.",21.84,/Volumes/T9/data/301/cam4/2026-10-17/09-00-00.jpg
+2026-10-17,10:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",19.02,/Volumes/T9/data/301/cam4/2026-10-17/09-59-59.jpg
+2026-10-17,11:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",19.12,/Volumes/T9/data/301/cam4/2026-10-17/11-00-00.jpg
+2026-10-17,12:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",20.14,/Volumes/T9/data/301/cam4/2026-10-17/12-00-00.jpg
+2026-10-17,13:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (ignoring masked black regions), indicating ceiling lights are on.",20.56,/Volumes/T9/data/301/cam4/2026-10-17/13-00-00.jpg
+2026-10-17,14:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",17.35,/Volumes/T9/data/301/cam4/2026-10-17/14-00-00.jpg
+2026-10-17,15:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",19.97,/Volumes/T9/data/301/cam4/2026-10-17/15-00-00.jpg
+2026-10-17,16:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked black), indicating ceiling lights are on.",19.52,/Volumes/T9/data/301/cam4/2026-10-17/16-00-00.jpg
+2026-10-17,17:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked), indicating ceiling lights are on",25.49,/Volumes/T9/data/301/cam4/2026-10-17/17-00-00.jpg
+2026-10-17,18:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",17.72,/Volumes/T9/data/301/cam4/2026-10-17/18-00-00.jpg
+2026-10-17,19:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/19-00-00.jpg
+2026-10-17,20:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/20-00-00.jpg
+2026-10-17,21:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/21-00-00.jpg
+2026-10-17,22:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/22-00-00.jpg
+2026-10-17,23:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-17/23-00-00.jpg
+2026-10-18,00:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/00-00-00.jpg
+2026-10-18,01:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/01-00-00.jpg
+2026-10-18,02:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/02-00-00.jpg
+2026-10-18,03:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/03-00-00.jpg
+2026-10-18,04:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/04-00-00.jpg
+2026-10-18,05:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/05-00-00.jpg
+2026-10-18,06:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/06-00-00.jpg
+2026-10-18,07:00,cam4,켜짐,"Room is evenly and brightly lit, consistent with ceiling lights on",16.71,/Volumes/T9/data/301/cam4/2026-10-18/07-00-00.jpg
+2026-10-18,08:00,cam4,켜짐,"Room is evenly and brightly lit, consistent with ceiling lights on",18.0,/Volumes/T9/data/301/cam4/2026-10-18/08-00-00.jpg
+2026-10-18,09:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",22.59,/Volumes/T9/data/301/cam4/2026-10-18/09-00-00.jpg
+2026-10-18,10:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",25.87,/Volumes/T9/data/301/cam4/2026-10-18/10-00-00.jpg
+2026-10-18,11:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (excluding masked blacks), indicating ceiling lights are on.",17.46,/Volumes/T9/data/301/cam4/2026-10-18/11-00-00.jpg
+2026-10-18,12:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",20.29,/Volumes/T9/data/301/cam4/2026-10-18/12-00-00.jpg
+2026-10-18,13:00,cam4,켜짐,"Room is evenly and brightly lit with no dark patches, indicating ceiling lights are on",18.32,/Volumes/T9/data/301/cam4/2026-10-18/13-00-00.jpg
+2026-10-18,14:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",20.02,/Volumes/T9/data/301/cam4/2026-10-18/14-00-00.jpg
+2026-10-18,15:00,cam4,켜짐,"Room is evenly and brightly lit with no dark patches, indicating ceiling lights are on",19.46,/Volumes/T9/data/301/cam4/2026-10-18/15-00-00.jpg
+2026-10-18,16:00,cam4,켜짐,"Room is evenly and brightly lit with no dark patches, indicating ceiling lights are on",18.98,/Volumes/T9/data/301/cam4/2026-10-18/16-00-00.jpg
+2026-10-18,17:00,cam4,해석불가,(빈 응답),169.8,/Volumes/T9/data/301/cam4/2026-10-18/17-00-00.jpg
+2026-10-18,18:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/18-00-00.jpg
+2026-10-18,19:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/19-00-00.jpg
+2026-10-18,20:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/20-00-00.jpg
+2026-10-18,21:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/21-00-00.jpg
+2026-10-18,22:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/22-00-00.jpg
+2026-10-18,23:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-18/23-00-00.jpg
+2026-10-19,00:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-19/00-00-00.jpg
+2026-10-19,01:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-19/01-00-00.jpg
+2026-10-19,02:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-19/02-00-00.jpg
+2026-10-19,03:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-19/03-00-00.jpg
+2026-10-19,04:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-19/04-00-00.jpg
+2026-10-19,05:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-19/05-00-00.jpg
+2026-10-19,06:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-19/06-00-00.jpg
+2026-10-19,07:00,cam4,꺼짐,흑백(적외선) 사진 -> VLM 생략,0.0,/Volumes/T9/data/301/cam4/2026-10-19/07-00-00.jpg
+2026-10-19,08:00,cam4,켜짐,"Room is evenly and brightly lit with no dark patches, indicating ceiling lights are on",19.96,/Volumes/T9/data/301/cam4/2026-10-19/08-00-00.jpg
+2026-10-19,09:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",20.52,/Volumes/T9/data/301/cam4/2026-10-19/09-00-00.jpg
+2026-10-19,10:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas (except masked), indicating ceiling lights are on.",18.84,/Volumes/T9/data/301/cam4/2026-10-19/10-00-00.jpg
+2026-10-19,11:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",19.73,/Volumes/T9/data/301/cam4/2026-10-19/11-00-00.jpg
+2026-10-19,12:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",19.62,/Volumes/T9/data/301/cam4/2026-10-19/12-00-00.jpg
+2026-10-19,13:00,cam4,켜짐,"Room is evenly and brightly lit, indicating ceiling lights are on",18.75,/Volumes/T9/data/301/cam4/2026-10-19/13-00-00.jpg
+2026-10-19,14:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",19.81,/Volumes/T9/data/301/cam4/2026-10-19/14-00-00.jpg
+2026-10-19,15:00,cam4,켜짐,"Room is evenly and brightly lit with no dark areas, indicating ceiling lights are on",18.75,/Volumes/T9/data/301/cam4/2026-10-19/15-00-00.jpg
