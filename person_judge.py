@@ -7,6 +7,14 @@
        conf >= 0.5         -> 사람으로 확정 (YOLO)
        0.25 <= conf < 0.5  -> 애매함 -> VLM에게 빨간 상자 안이 사람인지 물어봄
        conf < 0.25         -> 버림 (YOLO가 애초에 돌려주지 않음)
+     [v2] conf >= 0.5 여도 아래 중 하나에 걸리면 VLM에게 한 번 더 물어봄 (물건 오판 줄이기)
+       적외선 : 사진이 흑백(적외선) = 조명이 꺼진 어두운 시간          (밤에 걸린 겉옷)
+       고정   : 같은 카메라에서 직전 --fixed-min 분 동안 거의 같은 박스가 계속 있음 (안 움직이는 물건)
+       아래끝 : 박스가 사진 맨 아래에 닿아 있고 엉덩이가 안 보임       (카메라 앞 의자 등받이)
+                기본은 꺼 둠(--edge-px 10 으로 켬). v1 결과로 미리 따져 보니 의자 등받이 오판은
+                전부 밤(적외선)이라 '적외선'으로 이미 잡히고, 낮에는 카메라 앞 실제 사람만 14번 걸렸음.
+       -> 버리는 조건이 아니라 VLM에게 넘기는 조건이라, 실제 사람을 놓칠 위험은 낮다.
+       -> --no-vlm 이면 판정은 YOLO 그대로 두고 boxes CSV '검사' 열에 이유만 남긴다.
   3) 사람의 기준점이 어느 좌석 영역 안에 있는지로 좌석 배정
        기준점 = 엉덩이 keypoint 2개의 가운데 (안 보이면 박스 중심 = 예전 시스템 방식)
   4) 카메라 합치기: 한 좌석이 두 카메라에 보이면 한 대라도 점유면 점유
@@ -43,12 +51,13 @@ import time
 import urllib.error
 import urllib.request
 from collections import defaultdict
+from datetime import date as Date
 from pathlib import Path
 
 import cv2
 import numpy as np
 
-from common import CAMS, hourly_photos, list_photos, read_truth
+from common import CAMS, GRAY_SAT, hourly_photos, list_photos, read_truth
 
 ROI_W, ROI_H = 1920, 1080  # seat_lines를 그린 사진 크기
 HIP_L, HIP_R = 11, 12      # COCO keypoint 번호: 왼쪽/오른쪽 엉덩이
@@ -111,9 +120,9 @@ def find_seat(polys, x, y):
 
 # ---------------------------------------------------------------- 사람 검출
 
-def detect(model, img, imgsz, conf_low):
+def detect(model, img, imgsz, conf_low, device=""):
     """YOLO-pose -> [{'box', 'conf', 'point', 'point_type'}, ...]"""
-    r = model(img, imgsz=imgsz, conf=conf_low, classes=[0], verbose=False)[0]
+    r = model(img, imgsz=imgsz, conf=conf_low, classes=[0], verbose=False, device=device or None)[0]
     people = []
     if r.boxes is None:
         return people
@@ -132,6 +141,40 @@ def detect(model, img, imgsz, conf_low):
     return people
 
 
+# ---------------------------------------------------------------- [v2] 한 번 더 확인할 조건
+
+def is_infrared(img):
+    """흑백(적외선) 사진이면 True = 조명이 꺼져 카메라가 적외선으로 바뀜 (common.is_grayscale과 같은 기준)"""
+    small = cv2.resize(img, (320, 180))
+    return float(cv2.cvtColor(small, cv2.COLOR_BGR2HSV)[:, :, 1].mean()) < GRAY_SAT
+
+
+def iou(a, b):
+    """두 박스가 겹치는 정도 (0~1). 1이면 완전히 같은 박스"""
+    x1, y1, x2, y2 = max(a[0], b[0]), max(a[1], b[1]), min(a[2], b[2]), min(a[3], b[3])
+    inter = max(0, x2 - x1) * max(0, y2 - y1)
+    union = (a[2] - a[0]) * (a[3] - a[1]) + (b[2] - b[0]) * (b[3] - b[1]) - inter
+    return inter / union if union else 0.0
+
+
+def to_abs_min(date, hhmm):
+    """('2026-10-17', '21:00') -> 날짜가 바뀌어도 이어지는 분 단위 시각"""
+    return Date.fromisoformat(date).toordinal() * 1440 + int(hhmm[:2]) * 60 + int(hhmm[3:5])
+
+
+def check_reasons(pp, infrared, past, img_h, fixed_iou, edge_px):
+    """확정(conf>=0.5) 박스라도 VLM에게 다시 물어볼 이유 목록.
+    past: 같은 카메라의 직전 몇 장 [[박스, ...], ...] (--fixed-min 분 안의 사진만)"""
+    reasons = []
+    if infrared:
+        reasons.append("적외선")
+    if len(past) >= 2 and all(any(iou(pp["box"], b) >= fixed_iou for b in boxes) for boxes in past):
+        reasons.append("고정")  # 직전 사진 모두에 거의 같은 박스 = 몇 시간 동안 안 움직임
+    if edge_px and pp["box"][3] >= img_h - edge_px and pp["point_type"] != "엉덩이":
+        reasons.append("아래끝")
+    return reasons
+
+
 # ---------------------------------------------------------------- VLM 확인
 
 def crop_with_box(img, box, margin=0.4):
@@ -142,6 +185,10 @@ def crop_with_box(img, box, margin=0.4):
     cx1, cy1, cx2, cy2 = max(0, x1 - mx), max(0, y1 - my), min(w, x2 + mx), min(h, y2 + my)
     crop = img[cy1:cy2, cx1:cx2].copy()
     cv2.rectangle(crop, (x1 - cx1, y1 - cy1), (x2 - cx1, y2 - cy1), (0, 0, 255), 3)
+    long_side = max(crop.shape[:2])
+    if long_side > 512:  # 큰 사진은 VLM이 느려져서 긴 쪽을 512로 줄임
+        s = 512 / long_side
+        crop = cv2.resize(crop, (int(crop.shape[1] * s), int(crop.shape[0] * s)))
     return crop
 
 
@@ -242,6 +289,11 @@ def main():
     ap.add_argument("--vlm", default="qwen3-vl:4b")
     ap.add_argument("--host", default="http://localhost:11434")
     ap.add_argument("--timeout", type=int, default=120, help="VLM 한 번 최대 대기 초")
+    ap.add_argument("--no-check", action="store_true", help="[v2] 확정 박스 재확인(적외선/고정/아래끝)을 끔 = v1과 같음")
+    ap.add_argument("--fixed-min", type=int, default=120, help="[v2] 이 시간(분) 동안 같은 박스면 '고정'")
+    ap.add_argument("--fixed-iou", type=float, default=0.85, help="[v2] '같은 박스'로 볼 겹침 정도")
+    ap.add_argument("--edge-px", type=int, default=0,
+                    help="[v2] 사진 아래 끝에서 이 픽셀 안이면 '아래끝' (기본 0=끔: 낮에 카메라 앞 실제 사람만 걸려서)")
     ap.add_argument("--truth", help="정답지 엑셀. 주면 '사람 있음/없음'을 채점")
     ap.add_argument("--draw", action="store_true", help="확인용 그림 저장")
     ap.add_argument("-o", "--out", default="", help="기본 results/person_<room>")
@@ -268,8 +320,11 @@ def main():
     seat_rows, box_rows, room_pred = [], [], {}
     warned = set()
     n_vlm = vlm_sec = 0
+    history = defaultdict(list)    # [v2] cam -> [(분 단위 시각, [박스, ...]), ...]
+    n_check = defaultdict(int)     # [v2] 재확인 이유별 개수
     for n, (key, photos) in enumerate(sorted(groups.items()), 1):
         date, hhmm = key
+        now = to_abs_min(date, hhmm)
         hits = defaultdict(list)  # 좌석 -> [(cam, 사람/판정불가, 근거)]
         anyone = unsure = False
         for cam in cams:
@@ -286,11 +341,20 @@ def main():
                 warned.add(cam)
             polys = scale_polys(seat_polys.get(cam, {}), w, h)
 
-            people = detect(model, img, args.imgsz, args.conf_low)
+            people = detect(model, img, args.imgsz, args.conf_low, args.device)
+            infrared = is_infrared(img)
+            past = [boxes for t, boxes in history[cam] if now - args.fixed_min <= t < now]
+            history[cam] = [(t, b) for t, b in history[cam] if t >= now - args.fixed_min]
+            history[cam].append((now, [pp["box"] for pp in people]))
             occupied = set()
             for pp in people:
                 pp["vlm"], pp["vlm_reason"], pp["vlm_sec"] = "", "", ""
-                if pp["conf"] >= args.conf_high:
+                pp["check"] = []
+                if pp["conf"] >= args.conf_high and not args.no_check:
+                    pp["check"] = check_reasons(pp, infrared, past, h, args.fixed_iou, args.edge_px)
+                    for r in pp["check"]:
+                        n_check[r] += 1
+                if pp["conf"] >= args.conf_high and (not pp["check"] or args.no_vlm):
                     pp["final"], pp["decided_by"] = "사람", "YOLO"
                 elif args.no_vlm:
                     pp["final"], pp["decided_by"] = "판정불가", "VLM안씀"
@@ -298,7 +362,7 @@ def main():
                     ans, reason, sec = ask_vlm(args.host, args.vlm, crop_with_box(img, pp["box"]), args.timeout)
                     pp["vlm"], pp["vlm_reason"], pp["vlm_sec"] = ans, reason, sec
                     pp["final"] = {"사람": "사람", "아님": "아님"}.get(ans, "판정불가")
-                    pp["decided_by"] = "VLM"
+                    pp["decided_by"] = "VLM재확인" if pp["check"] else "VLM"
                     n_vlm += 1
                     vlm_sec += sec
                 pp["seat"] = find_seat(polys, *pp["point"]) or ""
@@ -313,7 +377,8 @@ def main():
                 box_rows.append({"date": date, "time": hhmm, "cam": cam, "conf": pp["conf"],
                                  "box": "%d,%d,%d,%d" % pp["box"], "point": "%d,%d" % pp["point"],
                                  "point_type": pp["point_type"], "seat": pp["seat"],
-                                 "판정": pp["final"], "근거": pp["decided_by"], "vlm_답": pp["vlm"],
+                                 "판정": pp["final"], "근거": pp["decided_by"],
+                                 "검사": "+".join(pp["check"]), "적외선": int(infrared), "vlm_답": pp["vlm"],
                                  "vlm_이유": pp["vlm_reason"], "vlm_초": pp["vlm_sec"], "file": str(p)})
             if args.draw:
                 draw(img, polys, people, occupied, out / "images" / f"{date}_{hhmm.replace(':', '')}_{cam}.jpg")
@@ -345,6 +410,9 @@ def main():
             w.writeheader()
             w.writerows(rows)
         print(f"CSV: {path} ({len(rows)}줄)")
+    if n_check:
+        print("[v2] 재확인 조건에 걸린 확정 박스: " + ", ".join(f"{k} {v}개" for k, v in n_check.items())
+              + (" (--no-vlm 이라 판정은 YOLO 그대로)" if args.no_vlm else ""))
     if n_vlm:
         print(f"VLM에게 물어본 박스 {n_vlm}개, 평균 {vlm_sec / n_vlm:.1f}초")
 
