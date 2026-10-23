@@ -27,7 +27,14 @@
 
 준비:
   pip install ultralytics
-  ollama pull qwen3-vl:4b
+  ollama pull qwen3-vl:4b-instruct   # [v3] qwen3-vl:4b 는 thinking 버전 (생각을 못 꺼서 한 번에 20~120초)
+
+[v3] VLM 질문 바꿈 (vlm_prompt_test.py 실험으로 결정):
+  프롬프트 D: 머리가 보이는지 먼저 묻고, 머리가 없으면 '아님'. 흑백 사진의 옷·의자 주의 안내
+  박스 주변을 넓게(1.2배) 잘라 의자까지 보이게 하고, 긴 쪽 512px로 줄여서 보냄
+[v3] VLM은 좌석(ROI) 안의 박스에만 물어봄 (YOLO는 그대로 사진 전체에 돌림)
+  좌석 밖 + 확정(conf>=0.5) -> 그대로 '사람' (강의실 사람 있음/없음에는 씀)
+  좌석 밖 + 애매함          -> 묻지 않고 '아님' (근거: 좌석밖)
 
 사용 예:
   python person_judge.py /Volumes/T9/data 301                    # 매 정시 사진만 (정답지와 같은 기준)
@@ -69,7 +76,19 @@ VLM_PROMPT = (
     "- 의자에 걸린 옷, 가방, 인형, 모니터 화면 속 사람은 사람이 아니다.\n"
     "- 몸의 일부만 보이거나 가려져 있어도 실제 사람이면 사람이다.\n"
     'JSON으로만 답하라: {"person": true 또는 false, "reason": "짧은 이유"}'
+)  # v1, v2에서 쓴 프롬프트 (vlm_prompt_test.py 의 A). 흑백 사진의 겉옷을 '사람'이라고 함
+
+# [v3] vlm_prompt_test.py 의 D (넓게완화). instruct 모델로 38개 중 37개, 물건 28/28 '아님', 시간 초과 0
+VLM_PROMPT_V3 = (
+    "이 사진은 대학교 강의실 CCTV 사진의 일부다. 밤에는 흑백(적외선) 사진일 수 있다.\n"
+    "흑백 사진에서는 의자 등받이에 걸린 어두운 옷, 가방, 인형, 의자 자체가 사람처럼 보일 수 있으니 주의하라.\n"
+    "빨간 상자 안만 보고 아래 순서로 판단하라. 빨간 상자 바깥은 무시하라.\n"
+    "1) 빨간 상자 안에 사람의 머리(얼굴, 뒤통수, 머리카락)가 보이는가?\n"
+    "2) 머리 아래로 어깨나 팔 중 하나라도 이어져 보이는가? 책상이나 모니터에 몸 일부가 가려진 것은 괜찮다.\n"
+    "옷이나 물건만 있고 머리가 없으면 사람이 아니다.\n"
+    'JSON으로만 답하라: {"head": true 또는 false, "person": true 또는 false, "reason": "짧은 이유"}'
 )
+CROP_MARGIN = 1.2  # [v3] 박스 주변을 넓게 잘라 의자 전체가 보이게 (옷이 의자에 걸린 맥락)
 
 
 # ---------------------------------------------------------------- 좌석 영역
@@ -202,7 +221,7 @@ def _post(host, body, timeout):
 def ask_vlm(host, model, crop, timeout):
     """(사람/아님/실패, 이유, 걸린 초)"""
     ok, buf = cv2.imencode(".jpg", crop, [cv2.IMWRITE_JPEG_QUALITY, 90])
-    body = {"model": model, "prompt": VLM_PROMPT, "images": [base64.b64encode(buf).decode()],
+    body = {"model": model, "prompt": VLM_PROMPT_V3, "images": [base64.b64encode(buf).decode()],
             "stream": False, "format": "json",
             "options": {"temperature": 0},  # 같은 사진엔 같은 답
             "think": False}                 # 생각 모드 끄기 (qwen3 계열 빈 답 방지)
@@ -221,9 +240,13 @@ def ask_vlm(host, model, crop, timeout):
     sec = round(time.time() - t0, 2)
     try:
         ans = json.loads(text)
-        p = ans.get("person")
-        if isinstance(p, str):
-            p = p.strip().lower() in ("true", "yes")
+
+        def yes(v):
+            return v.strip().lower() in ("true", "yes") if isinstance(v, str) else bool(v)
+
+        p = yes(ans.get("person"))
+        if "head" in ans and not yes(ans["head"]):  # [v3] 머리가 없다고 했으면 사람이라고 해도 아님
+            p = False
         return ("사람" if p else "아님"), str(ans.get("reason", "")), sec
     except (json.JSONDecodeError, AttributeError):
         return "실패", text[:80] or "(빈 응답)", sec
@@ -286,7 +309,8 @@ def main():
     ap.add_argument("--conf-high", type=float, default=0.5, help="이 이상이면 사람으로 확정")
     ap.add_argument("--conf-low", type=float, default=0.25, help="이 미만은 버림")
     ap.add_argument("--no-vlm", action="store_true", help="VLM을 쓰지 않음 (애매한 건 판정불가)")
-    ap.add_argument("--vlm", default="qwen3-vl:4b")
+    ap.add_argument("--vlm", default="qwen3-vl:4b-instruct",
+                    help="[v3] instruct 버전. qwen3-vl:4b 는 thinking 버전이라 think=false 를 무시하고 느림")
     ap.add_argument("--host", default="http://localhost:11434")
     ap.add_argument("--timeout", type=int, default=120, help="VLM 한 번 최대 대기 초")
     ap.add_argument("--no-check", action="store_true", help="[v2] 확정 박스 재확인(적외선/고정/아래끝)을 끔 = v1과 같음")
@@ -319,7 +343,7 @@ def main():
 
     seat_rows, box_rows, room_pred = [], [], {}
     warned = set()
-    n_vlm = vlm_sec = 0
+    n_vlm = vlm_sec = n_skip = 0
     history = defaultdict(list)    # [v2] cam -> [(분 단위 시각, [박스, ...]), ...]
     n_check = defaultdict(int)     # [v2] 재확인 이유별 개수
     for n, (key, photos) in enumerate(sorted(groups.items()), 1):
@@ -350,22 +374,28 @@ def main():
             for pp in people:
                 pp["vlm"], pp["vlm_reason"], pp["vlm_sec"] = "", "", ""
                 pp["check"] = []
-                if pp["conf"] >= args.conf_high and not args.no_check:
+                # [v3] 좌석을 먼저 찾고, VLM은 좌석(ROI) 안의 박스에만 물어본다 (v2에서 VLM 질문의 37%가 좌석 밖)
+                pp["seat"] = find_seat(polys, *pp["point"]) or ""
+                in_seat = bool(pp["seat"])
+                if pp["conf"] >= args.conf_high and in_seat and not args.no_check:
                     pp["check"] = check_reasons(pp, infrared, past, h, args.fixed_iou, args.edge_px)
                     for r in pp["check"]:
                         n_check[r] += 1
                 if pp["conf"] >= args.conf_high and (not pp["check"] or args.no_vlm):
-                    pp["final"], pp["decided_by"] = "사람", "YOLO"
+                    pp["final"], pp["decided_by"] = "사람", "YOLO"  # 좌석 밖이라도 확실하면 '강의실 사람 있음'에 씀
+                elif not in_seat:
+                    pp["final"], pp["decided_by"] = "아님", "좌석밖"  # 좌석 밖의 애매한 박스는 묻지 않고 버림
+                    n_skip += 1
                 elif args.no_vlm:
                     pp["final"], pp["decided_by"] = "판정불가", "VLM안씀"
                 else:
-                    ans, reason, sec = ask_vlm(args.host, args.vlm, crop_with_box(img, pp["box"]), args.timeout)
+                    ans, reason, sec = ask_vlm(args.host, args.vlm, crop_with_box(img, pp["box"], CROP_MARGIN),
+                                             args.timeout)
                     pp["vlm"], pp["vlm_reason"], pp["vlm_sec"] = ans, reason, sec
                     pp["final"] = {"사람": "사람", "아님": "아님"}.get(ans, "판정불가")
                     pp["decided_by"] = "VLM재확인" if pp["check"] else "VLM"
                     n_vlm += 1
                     vlm_sec += sec
-                pp["seat"] = find_seat(polys, *pp["point"]) or ""
                 if pp["final"] == "사람":
                     anyone = True
                     if pp["seat"]:
@@ -413,6 +443,8 @@ def main():
     if n_check:
         print("[v2] 재확인 조건에 걸린 확정 박스: " + ", ".join(f"{k} {v}개" for k, v in n_check.items())
               + (" (--no-vlm 이라 판정은 YOLO 그대로)" if args.no_vlm else ""))
+    if n_skip:
+        print(f"[v3] 좌석 밖이라 VLM에게 묻지 않고 버린 애매한 박스 {n_skip}개")
     if n_vlm:
         print(f"VLM에게 물어본 박스 {n_vlm}개, 평균 {vlm_sec / n_vlm:.1f}초")
 
