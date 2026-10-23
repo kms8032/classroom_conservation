@@ -11,4 +11,7 @@ data/
 # 확인용 이미지
 labels/images/
 results/person_301/images/
+results/wide_301_t1/images/
+results/wide_301_t3/images/
+results/vlm_prompt/crops/
 __pycache__/
