@@ -10,4 +10,5 @@ data/
 
 # 확인용 이미지
 labels/images/
+results/person_301/images/
 __pycache__/
