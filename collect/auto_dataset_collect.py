@@ -23,7 +23,8 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-load_dotenv(os.path.join(BASE_DIR, ".env"))  # .env 파일 내용 읽어옴
+ROOT_DIR = os.path.dirname(BASE_DIR)                   # 저장소 루트
+load_dotenv(os.path.join(ROOT_DIR, ".env"))
 
 # .env 파일 확인
 REQUIRED = ["CAM_ID", "CAM_PASSWORD", "CAM_PORT", "CAM1_IP", "CAM2_IP", "CAM3_IP", "CAM4_IP"]
@@ -54,7 +55,7 @@ if args.interval <= 0:
 # ──────────────────────────────────────────────
 ROOM = args.room
 INTERVAL_MIN = args.interval                     # 캡처 간격(분)
-SAVE_ROOT = os.path.join(BASE_DIR, "data", ROOM) # 스크립트 위치 기준 경로
+SAVE_ROOT = os.path.join(ROOT_DIR, "data", ROOM) # 스크립트 위치 기준 경로
 JPEG_QUALITY = 95                                # 학습 데이터용이라 화질 높게
 RETRY = 3                                        # 연결 실패 시 재시도 횟수
 TIMEOUT_MS = 5000                                # 카메라 연결/읽기 타임아웃(5초)
