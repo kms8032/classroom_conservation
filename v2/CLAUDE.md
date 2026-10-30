@@ -10,7 +10,7 @@
   - YOLO-pose + Claude API, 10분 단위 순간 캡처, 앉음/서 있음 판단 기반 좌석 점유
 - **v2** (`classroom_conservation/v2/`): https://github.com/kms8032/classroom_conservation
   - v1을 고쳐 쓰지 않고 **새로 작성**한다. ...
-  - 저장소 루트의 `auto_dataset_collect.py`는 학습용 사진 수집 스크립트로, v2 코드와 분리해서 유지한다 (데이터 수집 코드는 `collect` 브랜치로 유지)
+  - `collect/auto_dataset_collect.py`는 학습용 사진 수집 스크립트로, v2 코드와 분리해서 유지한다.
 
 ### 목표
 
@@ -186,13 +186,13 @@ v1에 없는 것: 304호 좌석 매핑, 광각 3분할 탐지 코드.
 
 ## 저장소 구조
 
-```
 classroom_conservation/
-├── auto_dataset_collect.py   # 학습 데이터 수집 (v2와 별개)
+├── collect/ # 학습 데이터 수집 (v2와 별개)
+├── experiments/ # v2 설계 전 실험 코드와 결과 (태그 exp-2026-10)
+├── v2/ # 실시간 좌석 점유·인원 카운트 시스템
+│ └── CLAUDE.md
 ├── .env.example
-└── v2/                       # 실시간 좌석 점유·인원 카운트 시스템
-    └── CLAUDE.md
-```
+└── requirements.txt
 
-- v2 관련 코드는 모두 `v2/` 안에 작성한다. 루트의 수집 스크립트는 수정하지 않는다.
+- v2 관련 코드는 모두 `v2/` 안에 작성한다. collect/, experiments/ 폴더는 수정하지 않는다.
 - Claude Code는 `v2/` 폴더에서 실행한다.
