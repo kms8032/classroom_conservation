@@ -9,6 +9,8 @@
         {
           "camera_id": "CMQHMSGP4",
           "name": "CCTV 1",
+          "ip_env": "CAM_301_IP1",
+          "vendor": "tplink",
           "view_group": "A",
           "seat_count": 6,
           "seat_ids": [
@@ -133,6 +135,8 @@
         {
           "camera_id": "CMQHMT4GB",
           "name": "CCTV 2",
+          "ip_env": "CAM_301_IP2",
+          "vendor": "tplink",
           "view_group": "A",
           "seat_count": 8,
           "seat_ids": [
@@ -295,6 +299,8 @@
         {
           "camera_id": "CMQHMTVNB",
           "name": "CCTV 3",
+          "ip_env": "CAM_301_IP3",
+          "vendor": "tplink",
           "view_group": "B",
           "seat_count": 10,
           "seat_ids": [
@@ -495,6 +501,8 @@
         {
           "camera_id": "CMQHMUEHM",
           "name": "CCTV 4",
+          "ip_env": "CAM_301_IP4",
+          "vendor": "tplink",
           "view_group": "B",
           "seat_count": 7,
           "seat_ids": [
