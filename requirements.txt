@@ -4,3 +4,4 @@ openpyxl
 pillow
 ultralytics
 numpy
+pytest
